@@ -1,11 +1,2252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>gia</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Quiz · Equilibrio Químico y Lluvia Ácida 🐾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600;1,9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0508;
+    --bg-2: #110710;
+    --surface: #1a0c14;
+    --surface-2: #241019;
+    --surface-3: #2e1623;
+    --border: #3d1a2c;
+    --border-strong: #5a2740;
+    --text: #fff5f9;
+    --text-dim: #c4a8b4;
+    --text-mute: #7a5868;
+    --pink: #ff5a9f;
+    --pink-light: #ffb5d4;
+    --pink-soft: #ff8bbb;
+    --pink-deep: #c93b7c;
+    --pink-glow: rgba(255,90,159,.18);
+    --pink-faint: rgba(255,90,159,.08);
+    --mint: #a5e6c7;
+    --mint-soft: rgba(165,230,199,.10);
+    --mint-border: rgba(165,230,199,.4);
+    --coral: #ff7a8a;
+    --coral-soft: rgba(255,122,138,.10);
+    --coral-border: rgba(255,122,138,.4);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,90,159,.12), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 100% 50%, rgba(201,59,124,.08), transparent 60%),
+      radial-gradient(ellipse 60% 50% at 0% 100%, rgba(255,139,187,.06), transparent 60%);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  .app {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 20px 20px 80px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  /* Decorative paws background */
+  .paw-deco {
+    position: fixed;
+    color: var(--pink);
+    opacity: .04;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .paw-deco.p1 { top: 15%; left: -30px; transform: rotate(-20deg); }
+  .paw-deco.p2 { top: 45%; right: -20px; transform: rotate(35deg); }
+  .paw-deco.p3 { bottom: 20%; left: -10px; transform: rotate(15deg); }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 8px 0 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-kitten {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+    display: grid; place-items: center;
+    box-shadow: 0 4px 16px rgba(255,90,159,.3), inset 0 1px 0 rgba(255,255,255,.15);
+    flex-shrink: 0;
+  }
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  .brand-name {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+    letter-spacing: -.01em;
+  }
+  .brand-sub {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .header-actions { display: flex; gap: 8px; }
+  .icon-btn {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .icon-btn:hover { color: var(--pink); border-color: var(--pink-deep); background: var(--pink-faint); }
+  .icon-btn:active { transform: scale(.96); }
+  .icon-btn.hidden { display: none; }
+
+  /* PROGRESS */
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+  .progress-wrap.hidden { display: none; }
+  .progress-track {
+    flex: 1;
+    height: 5px;
+    background: var(--surface-2);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--pink) 0%, var(--pink-light) 100%);
+    border-radius: 999px;
+    transition: width .5s cubic-bezier(.22,.61,.36,1);
+    box-shadow: 0 0 14px rgba(255,90,159,.5);
+  }
+  .progress-text {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: .04em;
+    white-space: nowrap;
+  }
+  .progress-text strong { color: var(--pink-light); font-weight: 500; }
+
+  /* SHARED */
+  .screen { animation: fadeUp .5s cubic-bezier(.22,.61,.36,1) both; position: relative; z-index: 1; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+  }
+  @keyframes pop {
+    0% { transform: scale(0.6); opacity: 0; }
+    60% { transform: scale(1.08); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .15em;
+    color: var(--pink);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 18px;
+    height: 1px;
+    background: var(--pink);
+  }
+
+  /* WELCOME */
+  .welcome { padding: 8px 0 0; }
+  .welcome-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    position: relative;
+  }
+  .welcome-kitten {
+    width: 130px;
+    height: 130px;
+    margin-bottom: 12px;
+    animation: float-y 4s ease-in-out infinite;
+    filter: drop-shadow(0 8px 24px rgba(255,90,159,.25));
+  }
+  .welcome h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(38px, 8vw, 58px);
+    line-height: 1.0;
+    letter-spacing: -.025em;
+    margin-bottom: 20px;
+  }
+  .welcome h1 em {
+    font-style: italic;
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .lede {
+    font-size: 16.5px;
+    color: var(--text-dim);
+    max-width: 540px;
+    margin-bottom: 36px;
+    line-height: 1.55;
+  }
+  .lede strong { color: var(--text); font-weight: 600; }
+  .lede .heart { color: var(--pink); display: inline-block; }
+
+  /* MAIN CTA cards */
+  .start-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+  .start-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 20px;
+    cursor: pointer;
+    transition: all .25s ease;
+    text-align: left;
+    color: var(--text);
+    font-family: var(--sans);
+    position: relative;
+    overflow: hidden;
+  }
+  .start-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pink-deep), transparent);
+    opacity: 0;
+    transition: opacity .25s;
+  }
+  .start-card:hover {
+    border-color: var(--pink-deep);
+    background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(255,90,159,.15);
+  }
+  .start-card:hover::before { opacity: 1; }
+  .start-card:active { transform: translateY(-1px); }
+  .start-card.primary {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+    border-color: var(--pink);
+    color: #1a0508;
+    box-shadow: 0 8px 28px rgba(255,90,159,.3);
+  }
+  .start-card.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(255,90,159,.45);
+    background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink) 100%);
+  }
+  .start-card-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 14px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--pink-faint);
+    color: var(--pink);
+  }
+  .start-card.primary .start-card-icon {
+    background: rgba(26,5,8,.18);
+    color: #1a0508;
+  }
+  .start-card-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: -.01em;
+  }
+  .start-card-desc {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.45;
+  }
+  .start-card.primary .start-card-desc { color: rgba(26,5,8,.7); }
+  .start-card-arrow {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pink);
+  }
+  .start-card.primary .start-card-arrow { color: #1a0508; }
+
+  /* Meta info row */
+  .meta-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 18px 0 4px;
+    border-top: 1px dashed var(--border);
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: .1em;
+    color: var(--text-mute);
+    text-transform: uppercase;
+  }
+  .meta-value {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .meta-value em { color: var(--pink); font-style: normal; font-weight: 600; }
+
+  /* THEORY */
+  .theory { padding: 4px 0; }
+  .theory-header { margin-bottom: 28px; }
+  .theory-header h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(30px, 6vw, 44px);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-bottom: 10px;
+  }
+  .theory-header h1 em {
+    font-style: italic;
+    color: var(--pink);
+    font-weight: 500;
+  }
+  .theory-header p {
+    color: var(--text-dim);
+    font-size: 15px;
+    max-width: 540px;
+  }
+  .topic-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 28px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .topic-chip {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .18s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .topic-chip:hover {
+    background: var(--pink-faint);
+    color: var(--pink-light);
+    border-color: var(--pink-deep);
+  }
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 22px;
+    margin-bottom: 16px;
+    scroll-margin-top: 16px;
+    position: relative;
+  }
+  .topic-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 24px; bottom: 24px;
+    width: 3px;
+    background: linear-gradient(180deg, var(--pink) 0%, var(--pink-deep) 100%);
+    border-radius: 0 3px 3px 0;
+  }
+  .topic-num-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--pink);
+    letter-spacing: .12em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .topic-card h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -.01em;
+    margin-bottom: 18px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topic-card h4 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--pink-light);
+    margin-bottom: 8px;
+    margin-top: 18px;
+    letter-spacing: -.005em;
+  }
+  .topic-card h4:first-of-type { margin-top: 0; }
+  .topic-card p {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  .topic-card p strong { color: var(--text); font-weight: 600; }
+  .topic-card ul {
+    list-style: none;
+    margin-bottom: 12px;
+  }
+  .topic-card li {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    line-height: 1.55;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+  .topic-card li::before {
+    content: '◦';
+    position: absolute;
+    left: 4px;
+    top: 0;
+    color: var(--pink);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .topic-card li strong { color: var(--text); font-weight: 600; }
+  .chem, .topic-card code {
+    font-family: var(--mono);
+    font-size: .88em;
+    background: var(--bg-2);
+    padding: 2px 7px;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    color: var(--pink-light);
+    font-weight: 400;
+    letter-spacing: 0;
+    display: inline-block;
+  }
+  .formula-box {
+    background: linear-gradient(135deg, var(--bg-2) 0%, var(--surface-2) 100%);
+    border: 1px dashed var(--pink-deep);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--pink-light);
+    text-align: center;
+    letter-spacing: .02em;
+  }
+  .formula-box .formula-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-mute);
+    letter-spacing: .12em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .example-box {
+    background: var(--pink-faint);
+    border-left: 2px solid var(--pink);
+    padding: 12px 14px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+  .example-box strong { color: var(--pink-light); font-weight: 600; }
+  .kitten-note {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-2);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top: 14px;
+    border: 1px solid var(--border);
+  }
+  .kitten-note-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+  }
+  .kitten-note-text {
+    font-size: 13.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .kitten-note-text strong { color: var(--pink-light); font-style: normal; font-weight: 600; }
+
+  /* THEORY FOOTER CTA */
+  .theory-cta {
+    margin-top: 32px;
+    padding: 28px 24px;
+    background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+    border: 1px solid var(--pink-deep);
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .theory-cta::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, var(--pink-glow) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .theory-cta-kitten {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 14px;
+    position: relative;
+    animation: wiggle 3s ease-in-out infinite;
+  }
+  .theory-cta h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: -.01em;
+    position: relative;
+  }
+  .theory-cta p {
+    color: var(--text-dim);
+    font-size: 14.5px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  /* BUTTONS */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+    color: #1a0508;
+    border: none;
+    padding: 15px 26px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.005em;
+    cursor: pointer;
+    transition: all .2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 24px rgba(255,90,159,.35);
+    position: relative;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,90,159,.5); }
+  .btn-primary:active { transform: translateY(0) scale(.97); }
+  .btn-primary svg { transition: transform .2s; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    padding: 15px 24px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .btn-secondary:hover { border-color: var(--pink); background: var(--pink-faint); color: var(--pink-light); }
+  .btn-secondary:active { transform: scale(.97); }
+
+  /* QUESTION */
+  .question-wrap { padding: 4px 0; }
+  .q-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-mute);
+    letter-spacing: .12em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .q-num strong { color: var(--pink); font-weight: 500; }
+  .q-num .kitten-mini {
+    width: 22px;
+    height: 22px;
+  }
+  .question-text {
+    font-family: var(--serif);
+    font-size: clamp(22px, 4.5vw, 30px);
+    font-weight: 400;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+  .question-text em { font-style: italic; color: var(--pink-light); }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .option {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    text-align: left;
+    cursor: pointer;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.4;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all .18s ease;
+    position: relative;
+    width: 100%;
+  }
+  .option:hover:not(:disabled) {
+    border-color: var(--pink-deep);
+    background: linear-gradient(180deg, var(--surface-2) 0%, var(--surface) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(255,90,159,.1);
+  }
+  .option:active:not(:disabled) { transform: translateY(0) scale(.99); }
+  .option:disabled { cursor: default; }
+  .opt-letter {
+    width: 30px; height: 30px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: grid; place-items: center;
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dim);
+    flex-shrink: 0;
+    transition: all .18s ease;
+  }
+  .option:hover:not(:disabled) .opt-letter {
+    color: var(--pink-light);
+    border-color: var(--pink-deep);
+    background: var(--pink-faint);
+  }
+  .opt-text { padding-top: 4px; flex: 1; }
+  .option.correct {
+    border-color: var(--mint-border);
+    background: var(--mint-soft);
+    animation: pulseCorrect .4s ease;
+  }
+  .option.correct .opt-letter {
+    background: var(--mint);
+    color: #0a0508;
+    border-color: var(--mint);
+  }
+  .option.wrong {
+    border-color: var(--coral-border);
+    background: var(--coral-soft);
+    animation: shake .35s ease;
+  }
+  .option.wrong .opt-letter {
+    background: var(--coral);
+    color: #1a0506;
+    border-color: var(--coral);
+  }
+  .option.dimmed { opacity: .4; }
+  @keyframes pulseCorrect {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.015); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  /* FEEDBACK */
+  .feedback {
+    margin-top: 8px;
+    padding: 18px 20px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    animation: fadeUp .4s cubic-bezier(.22,.61,.36,1) both;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .feedback.correct { border-color: var(--mint-border); background: var(--mint-soft); }
+  .feedback.wrong { border-color: var(--coral-border); background: var(--coral-soft); }
+  .fb-kitten {
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    animation: pop .5s cubic-bezier(.22,.61,.36,1) both;
+  }
+  .fb-content { flex: 1; min-width: 0; }
+  .fb-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 500;
+  }
+  .feedback.correct .fb-head { color: var(--mint); }
+  .feedback.wrong .fb-head { color: var(--coral); }
+  .fb-body {
+    color: var(--text);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .fb-body strong { color: var(--text); font-weight: 600; }
+  .fb-body .chem {
+    background: rgba(255,255,255,.04);
+    color: var(--pink-light);
+  }
+  .next-wrap {
+    margin-top: 22px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* END SCREEN */
+  .end { padding: 12px 0; text-align: center; }
+  .end-kitten {
+    width: 130px;
+    height: 130px;
+    margin: 0 auto 8px;
+    animation: pop .6s cubic-bezier(.22,.61,.36,1) both, float-y 4s ease-in-out 0.6s infinite;
+    filter: drop-shadow(0 8px 24px rgba(255,90,159,.3));
+  }
+  .score-ring {
+    width: 180px; height: 180px;
+    margin: 0 auto 28px;
+    position: relative;
+  }
+  .score-ring svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+  }
+  .score-ring-bg { fill: none; stroke: var(--surface-2); stroke-width: 9; }
+  .score-ring-fg {
+    fill: none;
+    stroke: url(#pinkGrad);
+    stroke-width: 9;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1.6s cubic-bezier(.22,.61,.36,1);
+    filter: drop-shadow(0 0 10px rgba(255,90,159,.5));
+  }
+  .score-num {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+  }
+  .score-num-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .score-big {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 54px;
+    font-weight: 500;
+    letter-spacing: -.03em;
+    line-height: 1;
+  }
+  .score-big em { font-style: italic; color: var(--pink); font-weight: 600; }
+  .score-pct {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--text-dim);
+    margin-top: 6px;
+    letter-spacing: .08em;
+  }
+  .end h2 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 5vw, 36px);
+    font-weight: 400;
+    margin-bottom: 12px;
+    letter-spacing: -.015em;
+  }
+  .end h2 em {
+    font-style: italic;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 500;
+  }
+  .end-msg {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 460px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  .end-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .review {
+    margin-top: 44px;
+    text-align: left;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+  }
+  .review h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    letter-spacing: -.01em;
+  }
+  .review-item {
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    background: var(--surface);
+  }
+  .review-mark {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .review-mark.ok { background: var(--mint); color: #0a0508; }
+  .review-mark.no { background: var(--coral); color: #1a0506; }
+  .review-q {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-mute);
+    margin-bottom: 4px;
+    letter-spacing: .08em;
+  }
+  .review-text { color: var(--text-dim); line-height: 1.45; }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,5,8,.78);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+    animation: fadeIn .2s ease both;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 22px;
+    padding: 28px;
+    max-width: 380px;
+    width: 100%;
+    animation: fadeUp .25s ease both;
+    text-align: center;
+  }
+  .modal-kitten {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 12px;
+  }
+  .modal h3 {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: -.01em;
+  }
+  .modal p { color: var(--text-dim); font-size: 14.5px; margin-bottom: 22px; line-height: 1.5; }
+  .modal-actions { display: flex; gap: 10px; justify-content: center; }
+  .modal-actions button {
+    padding: 11px 20px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text);
+    transition: all .15s ease;
+  }
+  .modal-actions button:hover { background: var(--surface-2); }
+  .modal-actions .danger {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+    border-color: var(--pink);
+    color: #1a0508;
+    font-weight: 700;
+  }
+  .modal-actions .danger:hover { box-shadow: 0 6px 18px rgba(255,90,159,.35); }
+
+  .footer-credit {
+    margin-top: auto;
+    padding-top: 36px;
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--text-mute);
+    font-family: var(--mono);
+    letter-spacing: .08em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .footer-credit .heart-mini { color: var(--pink); }
+
+  .hidden { display: none !important; }
+  @media (max-width: 480px) {
+    .app { padding: 14px 14px 60px; }
+    .header { padding-bottom: 18px; margin-bottom: 18px; }
+    .brand-name { font-size: 15px; }
+    .start-cards { grid-template-columns: 1fr; gap: 10px; }
+    .meta-row { gap: 14px; }
+    .meta-value { font-size: 16px; }
+    .feedback { padding: 14px 16px; gap: 10px; }
+    .fb-kitten { width: 44px; height: 44px; }
+    .option { padding: 14px 14px; font-size: 14.5px; }
+    .topic-card { padding: 20px 18px; }
+    .topic-card h3 { font-size: 22px; }
+    .welcome-kitten { width: 110px; height: 110px; }
+    .end-kitten { width: 110px; height: 110px; }
+  }
+</style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
+<svg class="paw-deco p1" width="60" height="60" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="40" rx="14" ry="10" fill="currentColor"/><circle cx="15" cy="22" r="5" fill="currentColor"/><circle cx="25" cy="14" r="5" fill="currentColor"/><circle cx="35" cy="14" r="5" fill="currentColor"/><circle cx="45" cy="22" r="5" fill="currentColor"/></svg>
+<svg class="paw-deco p2" width="50" height="50" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="40" rx="14" ry="10" fill="currentColor"/><circle cx="15" cy="22" r="5" fill="currentColor"/><circle cx="25" cy="14" r="5" fill="currentColor"/><circle cx="35" cy="14" r="5" fill="currentColor"/><circle cx="45" cy="22" r="5" fill="currentColor"/></svg>
+<svg class="paw-deco p3" width="40" height="40" viewBox="0 0 60 60" fill="none"><ellipse cx="30" cy="40" rx="14" ry="10" fill="currentColor"/><circle cx="15" cy="22" r="5" fill="currentColor"/><circle cx="25" cy="14" r="5" fill="currentColor"/><circle cx="35" cy="14" r="5" fill="currentColor"/><circle cx="45" cy="22" r="5" fill="currentColor"/></svg>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="brand">
+      <div class="logo-kitten">
+        <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+          <path d="M 8 14 L 12 4 L 16 14 Z" fill="#fff5f9"/>
+          <path d="M 24 14 L 28 4 L 32 14 Z" fill="#fff5f9"/>
+          <path d="M 10 12 L 13 7 L 15 12 Z" fill="#ff5a9f"/>
+          <path d="M 25 12 L 27 7 L 30 12 Z" fill="#ff5a9f"/>
+          <circle cx="20" cy="22" r="13" fill="#fff5f9"/>
+          <circle cx="15.5" cy="20" r="1.8" fill="#1a0508"/>
+          <circle cx="24.5" cy="20" r="1.8" fill="#1a0508"/>
+          <path d="M 18.5 25 L 21.5 25 L 20 27 Z" fill="#ff5a9f"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Quiz <em>Química</em> 🐾</div>
+        <div class="brand-sub">Sumativa 6 · Semana 11</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn hidden" id="homeBtn" type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+        Inicio
+      </button>
+      <button class="icon-btn hidden" id="resetBtn" type="button">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        Reiniciar
+      </button>
+    </div>
+  </header>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap hidden" id="progressWrap">
+    <div class="progress-track"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+    <div class="progress-text"><strong id="qCurrent">0</strong>/<span id="qTotal">30</span></div>
+  </div>
+
+  <!-- MAIN -->
+  <main id="main"></main>
+
+  <div class="footer-credit">
+    EQUILIBRIO · LLUVIA ÁCIDA · INGENIERÍA <span class="heart-mini">♡</span>
+  </div>
+</div>
+
+<!-- Reusable kitten SVGs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff5a9f"/>
+      <stop offset="100%" stop-color="#ffb5d4"/>
+    </linearGradient>
+
+    <!-- Big kitten sitting (sleepy/cute) -->
+    <symbol id="kittenSit" viewBox="0 0 140 140">
+      <!-- body -->
+      <ellipse cx="70" cy="112" rx="38" ry="22" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5"/>
+      <!-- tail curl -->
+      <path d="M 105 108 Q 122 102 117 84 Q 113 72 105 78" stroke="#1a0c14" stroke-width="7" stroke-linecap="round" fill="none"/>
+      <path d="M 105 108 Q 122 102 117 84 Q 113 72 105 78" stroke="#ff5a9f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <!-- paws -->
+      <ellipse cx="52" cy="125" rx="7" ry="5" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.2"/>
+      <ellipse cx="88" cy="125" rx="7" ry="5" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.2"/>
+      <!-- pink paw pads -->
+      <ellipse cx="52" cy="124" rx="3" ry="2" fill="#ff5a9f"/>
+      <ellipse cx="88" cy="124" rx="3" ry="2" fill="#ff5a9f"/>
+      <!-- head -->
+      <circle cx="70" cy="60" r="38" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5"/>
+      <!-- ears -->
+      <path d="M 36 38 L 45 14 L 58 34 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 104 38 L 95 14 L 82 34 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 42 34 L 47 22 L 53 32 Z" fill="#ff5a9f"/>
+      <path d="M 98 34 L 93 22 L 87 32 Z" fill="#ff5a9f"/>
+      <!-- eyes (closed, sleepy) -->
+      <path d="M 50 58 Q 56 63 62 58" stroke="#fff5f9" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M 78 58 Q 84 63 90 58" stroke="#fff5f9" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <!-- blush -->
+      <ellipse cx="42" cy="70" rx="6" ry="3" fill="#ff5a9f" opacity=".5"/>
+      <ellipse cx="98" cy="70" rx="6" ry="3" fill="#ff5a9f" opacity=".5"/>
+      <!-- nose -->
+      <path d="M 65 72 L 75 72 L 70 78 Z" fill="#ff5a9f"/>
+      <!-- mouth -->
+      <path d="M 70 78 Q 64 84 60 81" stroke="#fff5f9" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+      <path d="M 70 78 Q 76 84 80 81" stroke="#fff5f9" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+      <!-- whiskers -->
+      <line x1="30" y1="74" x2="44" y2="76" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="30" y1="79" x2="44" y2="79" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="96" y1="76" x2="110" y2="74" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="96" y1="79" x2="110" y2="79" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <!-- Zzz -->
+      <text x="105" y="20" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="#ff8bbb" opacity=".7">z</text>
+      <text x="112" y="14" font-family="Fraunces, serif" font-style="italic" font-size="10" fill="#ff8bbb" opacity=".5">z</text>
+    </symbol>
+
+    <!-- Happy kitten (correct answer) -->
+    <symbol id="kittenHappy" viewBox="0 0 80 80">
+      <!-- head -->
+      <circle cx="40" cy="42" r="28" fill="#1a0c14" stroke="#a5e6c7" stroke-width="1.5"/>
+      <!-- ears -->
+      <path d="M 16 24 L 22 8 L 32 22 Z" fill="#1a0c14" stroke="#a5e6c7" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M 64 24 L 58 8 L 48 22 Z" fill="#1a0c14" stroke="#a5e6c7" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M 20 22 L 23 14 L 28 21 Z" fill="#ff5a9f"/>
+      <path d="M 60 22 L 57 14 L 52 21 Z" fill="#ff5a9f"/>
+      <!-- happy eyes (^^) -->
+      <path d="M 26 40 Q 30 36 34 40" stroke="#fff5f9" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <path d="M 46 40 Q 50 36 54 40" stroke="#fff5f9" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <!-- blush -->
+      <ellipse cx="22" cy="48" rx="4" ry="2.5" fill="#ff5a9f" opacity=".6"/>
+      <ellipse cx="58" cy="48" rx="4" ry="2.5" fill="#ff5a9f" opacity=".6"/>
+      <!-- nose -->
+      <path d="M 36 49 L 44 49 L 40 53 Z" fill="#ff5a9f"/>
+      <!-- big smile -->
+      <path d="M 30 53 Q 40 64 50 53" stroke="#fff5f9" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <!-- sparkles -->
+      <text x="6" y="14" font-family="serif" font-size="10" fill="#a5e6c7">✦</text>
+      <text x="68" y="18" font-family="serif" font-size="8" fill="#ff8bbb">✦</text>
+    </symbol>
+
+    <!-- Sad kitten (wrong answer) -->
+    <symbol id="kittenSad" viewBox="0 0 80 80">
+      <circle cx="40" cy="42" r="28" fill="#1a0c14" stroke="#ff7a8a" stroke-width="1.5"/>
+      <path d="M 16 24 L 22 8 L 32 22 Z" fill="#1a0c14" stroke="#ff7a8a" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M 64 24 L 58 8 L 48 22 Z" fill="#1a0c14" stroke="#ff7a8a" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M 20 22 L 23 14 L 28 21 Z" fill="#ff5a9f"/>
+      <path d="M 60 22 L 57 14 L 52 21 Z" fill="#ff5a9f"/>
+      <!-- sad droopy eyes -->
+      <ellipse cx="30" cy="40" rx="3" ry="3.5" fill="#fff5f9"/>
+      <ellipse cx="50" cy="40" rx="3" ry="3.5" fill="#fff5f9"/>
+      <circle cx="30" cy="42" r="1.6" fill="#1a0c14"/>
+      <circle cx="50" cy="42" r="1.6" fill="#1a0c14"/>
+      <!-- tear drop -->
+      <path d="M 31 46 Q 30 50 32 51 Q 34 50 33 46 Z" fill="#7dd3fc" opacity=".8"/>
+      <!-- blush -->
+      <ellipse cx="22" cy="50" rx="4" ry="2.5" fill="#ff5a9f" opacity=".4"/>
+      <ellipse cx="58" cy="50" rx="4" ry="2.5" fill="#ff5a9f" opacity=".4"/>
+      <!-- nose -->
+      <path d="M 36 50 L 44 50 L 40 54 Z" fill="#ff5a9f"/>
+      <!-- sad mouth -->
+      <path d="M 32 60 Q 40 54 48 60" stroke="#fff5f9" stroke-width="2" stroke-linecap="round" fill="none"/>
+    </symbol>
+
+    <!-- Mini kitten for question header -->
+    <symbol id="kittenMini" viewBox="0 0 40 40">
+      <path d="M 8 14 L 12 4 L 16 14 Z" fill="#ff5a9f"/>
+      <path d="M 24 14 L 28 4 L 32 14 Z" fill="#ff5a9f"/>
+      <circle cx="20" cy="22" r="13" fill="#ff5a9f"/>
+      <circle cx="15.5" cy="20" r="1.5" fill="#1a0508"/>
+      <circle cx="24.5" cy="20" r="1.5" fill="#1a0508"/>
+      <path d="M 18 25 L 22 25 L 20 27 Z" fill="#1a0508"/>
+    </symbol>
+
+    <!-- Reading kitten (theory) -->
+    <symbol id="kittenStudy" viewBox="0 0 90 80">
+      <!-- book -->
+      <rect x="20" y="55" width="50" height="20" rx="2" fill="#3d1a2c" stroke="#ff5a9f" stroke-width="1.2"/>
+      <line x1="45" y1="55" x2="45" y2="75" stroke="#ff5a9f" stroke-width="1"/>
+      <line x1="26" y1="62" x2="42" y2="62" stroke="#ff8bbb" stroke-width=".8"/>
+      <line x1="26" y1="66" x2="42" y2="66" stroke="#ff8bbb" stroke-width=".8"/>
+      <line x1="26" y1="70" x2="40" y2="70" stroke="#ff8bbb" stroke-width=".8"/>
+      <line x1="48" y1="62" x2="64" y2="62" stroke="#ff8bbb" stroke-width=".8"/>
+      <line x1="48" y1="66" x2="64" y2="66" stroke="#ff8bbb" stroke-width=".8"/>
+      <line x1="48" y1="70" x2="62" y2="70" stroke="#ff8bbb" stroke-width=".8"/>
+      <!-- kitten head behind book -->
+      <circle cx="45" cy="36" r="22" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.3"/>
+      <path d="M 26 22 L 30 8 L 38 22 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M 64 22 L 60 8 L 52 22 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M 29 19 L 32 12 L 35 19 Z" fill="#ff5a9f"/>
+      <path d="M 61 19 L 58 12 L 55 19 Z" fill="#ff5a9f"/>
+      <!-- focused eyes -->
+      <circle cx="37" cy="36" r="2.5" fill="#fff5f9"/>
+      <circle cx="53" cy="36" r="2.5" fill="#fff5f9"/>
+      <circle cx="37" cy="37" r="1.3" fill="#1a0508"/>
+      <circle cx="53" cy="37" r="1.3" fill="#1a0508"/>
+      <ellipse cx="30" cy="44" rx="4" ry="2" fill="#ff5a9f" opacity=".5"/>
+      <ellipse cx="60" cy="44" rx="4" ry="2" fill="#ff5a9f" opacity=".5"/>
+      <path d="M 43 46 L 47 46 L 45 49 Z" fill="#ff5a9f"/>
+    </symbol>
+
+    <!-- Trophy kitten (end - good score) -->
+    <symbol id="kittenWin" viewBox="0 0 140 140">
+      <!-- sparkles -->
+      <text x="10" y="20" font-family="serif" font-size="14" fill="#ff5a9f">✦</text>
+      <text x="118" y="30" font-family="serif" font-size="12" fill="#ffb5d4">✦</text>
+      <text x="20" y="50" font-family="serif" font-size="10" fill="#ff8bbb">✧</text>
+      <text x="115" y="60" font-family="serif" font-size="10" fill="#ff8bbb">✧</text>
+      <!-- body -->
+      <ellipse cx="70" cy="112" rx="36" ry="20" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5"/>
+      <!-- arms up celebrating -->
+      <path d="M 38 95 Q 22 80 28 60" stroke="#1a0c14" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <path d="M 38 95 Q 22 80 28 60" stroke="#ff5a9f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M 102 95 Q 118 80 112 60" stroke="#1a0c14" stroke-width="9" stroke-linecap="round" fill="none"/>
+      <path d="M 102 95 Q 118 80 112 60" stroke="#ff5a9f" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <!-- paw pads -->
+      <circle cx="28" cy="58" r="4" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1"/>
+      <circle cx="112" cy="58" r="4" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1"/>
+      <!-- head -->
+      <circle cx="70" cy="60" r="35" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5"/>
+      <!-- ears -->
+      <path d="M 38 40 L 45 16 L 58 36 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 102 40 L 95 16 L 82 36 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 43 35 L 47 22 L 53 33 Z" fill="#ff5a9f"/>
+      <path d="M 97 35 L 93 22 L 87 33 Z" fill="#ff5a9f"/>
+      <!-- happy ^^  eyes -->
+      <path d="M 53 56 Q 58 50 63 56" stroke="#fff5f9" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+      <path d="M 77 56 Q 82 50 87 56" stroke="#fff5f9" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+      <!-- blush -->
+      <ellipse cx="44" cy="68" rx="6" ry="3.5" fill="#ff5a9f" opacity=".55"/>
+      <ellipse cx="96" cy="68" rx="6" ry="3.5" fill="#ff5a9f" opacity=".55"/>
+      <!-- nose -->
+      <path d="M 65 70 L 75 70 L 70 76 Z" fill="#ff5a9f"/>
+      <!-- big smile -->
+      <path d="M 56 78 Q 70 92 84 78" stroke="#fff5f9" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <!-- whiskers -->
+      <line x1="32" y1="72" x2="46" y2="74" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="32" y1="77" x2="46" y2="77" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="94" y1="74" x2="108" y2="72" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="94" y1="77" x2="108" y2="77" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <!-- crown -->
+      <path d="M 50 18 L 55 8 L 60 16 L 70 4 L 80 16 L 85 8 L 90 18 Z" fill="#ffd700" stroke="#c93b7c" stroke-width="1.2" stroke-linejoin="round"/>
+      <circle cx="55" cy="11" r="1.5" fill="#ff5a9f"/>
+      <circle cx="70" cy="8" r="2" fill="#ff5a9f"/>
+      <circle cx="85" cy="11" r="1.5" fill="#ff5a9f"/>
+    </symbol>
+
+    <!-- Comforting kitten (end - low score) -->
+    <symbol id="kittenComfort" viewBox="0 0 140 140">
+      <!-- body -->
+      <ellipse cx="70" cy="112" rx="36" ry="22" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5"/>
+      <!-- paws -->
+      <ellipse cx="50" cy="125" rx="7" ry="5" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.2"/>
+      <ellipse cx="90" cy="125" rx="7" ry="5" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.2"/>
+      <ellipse cx="50" cy="124" rx="3" ry="2" fill="#ff5a9f"/>
+      <ellipse cx="90" cy="124" rx="3" ry="2" fill="#ff5a9f"/>
+      <!-- head -->
+      <circle cx="70" cy="60" r="36" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5"/>
+      <!-- ears -->
+      <path d="M 36 40 L 43 14 L 58 36 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 104 40 L 97 14 L 82 36 Z" fill="#1a0c14" stroke="#ff5a9f" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 41 35 L 45 22 L 51 33 Z" fill="#ff5a9f"/>
+      <path d="M 99 35 L 95 22 L 89 33 Z" fill="#ff5a9f"/>
+      <!-- determined eyes -->
+      <ellipse cx="55" cy="58" rx="3.5" ry="4" fill="#fff5f9"/>
+      <ellipse cx="85" cy="58" rx="3.5" ry="4" fill="#fff5f9"/>
+      <circle cx="55" cy="59" r="2" fill="#1a0508"/>
+      <circle cx="85" cy="59" r="2" fill="#1a0508"/>
+      <circle cx="56" cy="57" r=".8" fill="#fff5f9"/>
+      <circle cx="86" cy="57" r=".8" fill="#fff5f9"/>
+      <!-- blush -->
+      <ellipse cx="42" cy="70" rx="6" ry="3.5" fill="#ff5a9f" opacity=".55"/>
+      <ellipse cx="98" cy="70" rx="6" ry="3.5" fill="#ff5a9f" opacity=".55"/>
+      <!-- nose -->
+      <path d="M 65 72 L 75 72 L 70 78 Z" fill="#ff5a9f"/>
+      <!-- gentle smile -->
+      <path d="M 62 82 Q 70 86 78 82" stroke="#fff5f9" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+      <!-- whiskers -->
+      <line x1="30" y1="74" x2="44" y2="76" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="30" y1="79" x2="44" y2="79" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="96" y1="76" x2="110" y2="74" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <line x1="96" y1="79" x2="110" y2="79" stroke="#fff5f9" stroke-width="1" stroke-linecap="round"/>
+      <!-- heart above -->
+      <path d="M 70 15 C 67 10, 60 10, 60 18 C 60 24, 70 30, 70 30 C 70 30, 80 24, 80 18 C 80 10, 73 10, 70 15 Z" fill="#ff5a9f" opacity=".7"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Reset confirmation modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <svg class="modal-kitten" viewBox="0 0 80 80"><use href="#kittenSad"/></svg>
+    <h3>¿Reiniciar el quiz?</h3>
+    <p>Vas a perder el progreso actual y volver al inicio. El gatito está triste 🥺</p>
+    <div class="modal-actions">
+      <button id="modalCancel" type="button">Cancelar</button>
+      <button id="modalConfirm" class="danger" type="button">Sí, reiniciar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ======================
+// THEORY CONTENT
+// ======================
+const THEORY = [
+  {
+    id: "t1",
+    num: "01",
+    title: "Ácidos y bases",
+    content: `
+      <h4>Las 3 teorías clásicas</h4>
+      <ul>
+        <li><strong>Arrhenius:</strong> ácido libera <span class="chem">H⁺</span> en agua, base libera <span class="chem">OH⁻</span>. Limitada (solo en agua).</li>
+        <li><strong>Brønsted-Lowry:</strong> <strong>ácido = donador de H⁺</strong>, base = aceptor de H⁺. La más usada en problemas.</li>
+        <li><strong>Lewis:</strong> ácido = aceptor de pares de electrones, base = donador. Es la teoría más amplia.</li>
+      </ul>
+      <h4>Pares conjugados ácido-base</h4>
+      <p>Un par conjugado difiere en <strong>exactamente un protón (H⁺)</strong>. Cuando un ácido pierde H⁺ se convierte en su base conjugada; cuando una base gana H⁺ se convierte en su ácido conjugado.</p>
+      <div class="example-box">
+        <strong>Ejemplo:</strong> En <span class="chem">HCl + H₂O → Cl⁻ + H₃O⁺</span><br>
+        Pares: <span class="chem">HCl/Cl⁻</span> (ácido/base conjugada) y <span class="chem">H₂O/H₃O⁺</span> (base/ácido conjugado).
+      </div>
+      <div class="kitten-note">
+        <svg class="kitten-note-icon" viewBox="0 0 80 80"><use href="#kittenHappy"/></svg>
+        <div class="kitten-note-text"><strong>Tip:</strong> Para encontrar el par conjugado, solo agrega o quita UN H⁺. Si te confundes con cuántos electrones o cargas, recuerda: solo cambia 1 protón.</div>
+      </div>
+    `
+  },
+  {
+    id: "t2",
+    num: "02",
+    title: "Electrolitos: fuertes vs débiles",
+    content: `
+      <h4>Electrolitos fuertes</h4>
+      <p>Se disocian <strong>100% en agua</strong>. Conducen muy bien la electricidad.</p>
+      <ul>
+        <li><strong>Ácidos fuertes:</strong> <span class="chem">HCl, HBr, HI, HNO₃, H₂SO₄, HClO₄</span> (memorízalos, son los principales).</li>
+        <li><strong>Bases fuertes:</strong> hidróxidos del grupo I y algunos del II → <span class="chem">NaOH, KOH, LiOH, Ca(OH)₂, Ba(OH)₂</span>.</li>
+        <li><strong>Sales solubles:</strong> <span class="chem">NaCl, KNO₃</span>, etc.</li>
+      </ul>
+      <h4>Electrolitos débiles</h4>
+      <p>Se disocian <strong>parcialmente</strong>, estableciendo un equilibrio. Por eso necesitan una constante <span class="chem">Kₐ</span> o <span class="chem">K_b</span> para describirlos.</p>
+      <ul>
+        <li><strong>Ácidos débiles:</strong> <span class="chem">CH₃COOH</span> (acético), <span class="chem">HF, HCN, HNO₂, H₂CO₃</span>.</li>
+        <li><strong>Bases débiles:</strong> <span class="chem">NH₃</span> (amoníaco), aminas orgánicas.</li>
+      </ul>
+      <div class="example-box">
+        <strong>No electrolitos:</strong> sustancias que no se disocian (azúcar, etanol, glucosa). No conducen electricidad.
+      </div>
+    `
+  },
+  {
+    id: "t3",
+    num: "03",
+    title: "pH, pOH y la escala",
+    content: `
+      <h4>Definiciones clave</h4>
+      <div class="formula-box">
+        <span class="formula-label">Fórmulas esenciales</span>
+        pH = −log[H⁺]<br>
+        pOH = −log[OH⁻]<br>
+        pH + pOH = 14 (a 25°C)<br>
+        K_w = [H⁺] · [OH⁻] = 10⁻¹⁴
+      </div>
+      <h4>La escala de pH</h4>
+      <ul>
+        <li><strong>0 – 6:</strong> solución ácida (más ácida cuanto menor el pH).</li>
+        <li><strong>7:</strong> neutra (agua pura a 25°C).</li>
+        <li><strong>8 – 14:</strong> solución básica (más básica cuanto mayor el pH).</li>
+      </ul>
+      <h4>Para ácidos/bases FUERTES</h4>
+      <p>Como se disocian 100%, la concentración del ácido = concentración de H⁺.</p>
+      <div class="example-box">
+        <strong>Ej:</strong> HCl 0,01 M → [H⁺] = 0,01 = 10⁻² → pH = 2.<br>
+        <strong>Ej:</strong> NaOH 0,1 M → [OH⁻] = 0,1 → pOH = 1 → pH = 13.
+      </div>
+      <h4>Para ácidos DÉBILES</h4>
+      <p>Como se disocian parcialmente, usa la aproximación:</p>
+      <div class="formula-box">
+        [H⁺] ≈ √(Kₐ · C₀)<br>
+        pKₐ = −log(Kₐ)
+      </div>
+      <div class="example-box">
+        <strong>Ej:</strong> Ácido acético 0,1 M, Kₐ = 1,8×10⁻⁵<br>
+        [H⁺] = √(1,8×10⁻⁵ · 0,1) = √(1,8×10⁻⁶) ≈ 1,34×10⁻³ M → pH ≈ 2,87.
+      </div>
+      <div class="kitten-note">
+        <svg class="kitten-note-icon" viewBox="0 0 80 80"><use href="#kittenHappy"/></svg>
+        <div class="kitten-note-text"><strong>Truco:</strong> Si te dan [H⁺] = 10⁻ⁿ, el pH es directamente n. Si te dan pH = n, entonces [H⁺] = 10⁻ⁿ. Solo invierte el signo del exponente.</div>
+      </div>
+    `
+  },
+  {
+    id: "t4",
+    num: "04",
+    title: "Equilibrio químico (Kc y Kp)",
+    content: `
+      <h4>La expresión de equilibrio</h4>
+      <p>Para una reacción genérica <span class="chem">aA + bB ⇌ cC + dD</span>:</p>
+      <div class="formula-box">
+        <span class="formula-label">Constante de equilibrio</span>
+        K_c = [C]^c · [D]^d / ([A]^a · [B]^b)
+      </div>
+      <p><strong>Productos sobre reactantes</strong>, cada uno elevado a su coeficiente estequiométrico.</p>
+      <p><strong>Importante:</strong> los <strong>sólidos puros y líquidos puros NO aparecen</strong> en la expresión de K (sus "concentraciones" son constantes).</p>
+      <h4>¿Qué nos dice el valor de Kc?</h4>
+      <ul>
+        <li><strong>K_c &gt;&gt; 1:</strong> equilibrio desplazado hacia <strong>productos</strong> (reacción casi completa).</li>
+        <li><strong>K_c ≈ 1:</strong> cantidades comparables de reactantes y productos.</li>
+        <li><strong>K_c &lt;&lt; 1:</strong> equilibrio desplazado hacia <strong>reactantes</strong> (poca reacción).</li>
+      </ul>
+      <h4>Kp para gases</h4>
+      <div class="formula-box">
+        K_p = K_c · (RT)^Δn
+      </div>
+      <p>Donde <strong>Δn = moles gaseosos de productos − moles gaseosos de reactantes</strong>. Si Δn = 0, entonces K_p = K_c.</p>
+      <h4>Cociente de reacción Q</h4>
+      <p>Tiene la misma forma que K pero con concentraciones en CUALQUIER momento (no necesariamente equilibrio).</p>
+      <ul>
+        <li><strong>Q &lt; K:</strong> la reacción avanza hacia productos.</li>
+        <li><strong>Q &gt; K:</strong> la reacción retrocede hacia reactantes.</li>
+        <li><strong>Q = K:</strong> está en equilibrio.</li>
+      </ul>
+      <div class="example-box">
+        <strong>Ej:</strong> Para <span class="chem">N₂O₄ ⇌ 2NO₂</span> con Kc = 4. Si [N₂O₄] = 0,5 M en equilibrio:<br>
+        4 = [NO₂]² / 0,5 → [NO₂]² = 2 → [NO₂] = √2 ≈ 1,41 M.
+      </div>
+    `
+  },
+  {
+    id: "t5",
+    num: "05",
+    title: "Principio de Le Chatelier",
+    content: `
+      <h4>El principio en una frase</h4>
+      <p style="font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--pink-light); padding: 10px 0;">
+        "Si un sistema en equilibrio es perturbado, este responde desplazándose para contrarrestar la perturbación."
+      </p>
+      <h4>Las 3 perturbaciones que tienes que dominar</h4>
+      <h4 style="color: var(--text); font-style: normal;">1. Cambio de concentración</h4>
+      <ul>
+        <li>Si <strong>aumentas reactantes</strong> → equilibrio se desplaza hacia <strong>productos</strong>.</li>
+        <li>Si <strong>aumentas productos</strong> → se desplaza hacia <strong>reactantes</strong>.</li>
+        <li>Si <strong>quitas algo</strong> → se desplaza para reponerlo.</li>
+        <li><strong>K_c NO cambia.</strong></li>
+      </ul>
+      <h4 style="color: var(--text); font-style: normal;">2. Cambio de presión (solo gases)</h4>
+      <ul>
+        <li>Aumentar P → equilibrio hacia el lado con <strong>MENOS moles gaseosos</strong>.</li>
+        <li>Disminuir P → hacia el lado con <strong>MÁS moles gaseosos</strong>.</li>
+        <li>Si los moles gaseosos son iguales en ambos lados, P no afecta.</li>
+        <li><strong>K_c NO cambia.</strong></li>
+      </ul>
+      <h4 style="color: var(--text); font-style: normal;">3. Cambio de temperatura</h4>
+      <ul>
+        <li><strong>Exotérmica</strong> (libera calor): aumentar T desplaza hacia <strong>reactantes</strong>. K_c <strong>disminuye</strong>.</li>
+        <li><strong>Endotérmica</strong> (absorbe calor): aumentar T desplaza hacia <strong>productos</strong>. K_c <strong>aumenta</strong>.</li>
+        <li><strong>SOLO la temperatura cambia el valor de K_c.</strong></li>
+      </ul>
+      <div class="example-box">
+        <strong>Caso clásico:</strong> proceso Haber-Bosch para NH₃:<br>
+        <span class="chem">N₂(g) + 3H₂(g) ⇌ 2NH₃(g)</span> + calor (exotérmica)<br>
+        Para maximizar NH₃: ALTA presión (4 moles → 2 moles), TEMPERATURA moderada (favorece productos pero la cinética requiere algo de T) y se usa catalizador (Fe).
+      </div>
+      <h4>Los catalizadores</h4>
+      <p>Los catalizadores <strong>NO desplazan el equilibrio</strong>. Solo aceleran ambas reacciones (directa e inversa) por igual, haciendo que el equilibrio se alcance más rápido.</p>
+      <div class="kitten-note">
+        <svg class="kitten-note-icon" viewBox="0 0 80 80"><use href="#kittenHappy"/></svg>
+        <div class="kitten-note-text"><strong>Resumen ultra:</strong> Concentración y presión solo <em>desplazan</em>. Solo la temperatura <em>cambia el valor</em> de K_c.</div>
+      </div>
+    `
+  },
+  {
+    id: "t6",
+    num: "06",
+    title: "Lluvia ácida y atmósfera",
+    content: `
+      <h4>¿Qué es la lluvia ácida?</h4>
+      <p>Lluvia con pH menor a 5,6 (la lluvia "normal" ya es levemente ácida por el <span class="chem">CO₂</span> que forma ácido carbónico).</p>
+      <div class="formula-box">
+        <span class="formula-label">pH típicos</span>
+        Lluvia normal: ~5,6<br>
+        Lluvia ácida: 4,0 – 5,5<br>
+        Casos extremos: pH 2 – 3
+      </div>
+      <h4>Los 2 culpables principales</h4>
+      <h4 style="color: var(--text); font-style: normal;">SO₂ (dióxido de azufre)</h4>
+      <p>Proviene de quemar combustibles fósiles con S (carbón, petróleo) y de volcanes. Reacciones:</p>
+      <ul>
+        <li><span class="chem">2SO₂ + O₂ → 2SO₃</span></li>
+        <li><span class="chem">SO₃ + H₂O → H₂SO₄</span> (ácido sulfúrico, FUERTE)</li>
+      </ul>
+      <h4 style="color: var(--text); font-style: normal;">NOₓ (óxidos de nitrógeno)</h4>
+      <p>Se forman en motores de combustión a alta T (autos, termoeléctricas).</p>
+      <ul>
+        <li><span class="chem">N₂ + O₂ → 2NO</span> (a alta T)</li>
+        <li><span class="chem">2NO + O₂ → 2NO₂</span></li>
+        <li><span class="chem">3NO₂ + H₂O → 2HNO₃ + NO</span> (ácido nítrico)</li>
+      </ul>
+      <h4>Efectos ambientales</h4>
+      <ul>
+        <li><strong>Acidificación de lagos y ríos:</strong> mata peces y vida acuática.</li>
+        <li><strong>Daño a bosques:</strong> defoliación, deterioro de raíces, pérdida de nutrientes del suelo.</li>
+        <li><strong>Corrosión de edificios:</strong> mármol y caliza (<span class="chem">CaCO₃</span>) se disuelven.</li>
+        <li><strong>Suelos:</strong> libera aluminio tóxico y lava nutrientes como Ca²⁺ y Mg²⁺.</li>
+      </ul>
+      <h4>¿Cómo se mitiga? (ingeniería aplicada)</h4>
+      <ul>
+        <li><strong>Lavadores (scrubbers)</strong> con <span class="chem">CaCO₃</span> en chimeneas: <span class="chem">SO₂ + CaCO₃ → CaSO₃ + CO₂</span>.</li>
+        <li>Usar <strong>combustibles bajos en azufre</strong> o desulfurización previa.</li>
+        <li><strong>Catalizadores</strong> en autos (convertidores catalíticos) que reducen NOₓ.</li>
+        <li>Transición a <strong>energías renovables</strong>.</li>
+        <li>Regulaciones ambientales (límites de emisión).</li>
+      </ul>
+      <div class="example-box">
+        <strong>Conexión con equilibrio:</strong> todas estas reacciones tienen una K asociada y se pueden manipular controlando T, P y concentraciones — exactamente lo que estudias en este curso.
+      </div>
+    `
+  },
+  {
+    id: "t7",
+    num: "07",
+    title: "Hidrólisis y buffers",
+    content: `
+      <h4>Hidrólisis de sales</h4>
+      <p>Cuando disuelves una sal en agua, los iones pueden reaccionar con el agua y alterar el pH. Depende del origen de la sal:</p>
+      <ul>
+        <li><strong>Ácido fuerte + base fuerte</strong> (ej: <span class="chem">NaCl</span>) → solución <strong>neutra</strong>.</li>
+        <li><strong>Ácido débil + base fuerte</strong> (ej: <span class="chem">CH₃COONa</span>) → solución <strong>básica</strong>.</li>
+        <li><strong>Ácido fuerte + base débil</strong> (ej: <span class="chem">NH₄Cl</span>) → solución <strong>ácida</strong>.</li>
+        <li><strong>Ácido débil + base débil:</strong> depende de los valores de Kₐ y K_b.</li>
+      </ul>
+      <h4>Buffers (soluciones tampón)</h4>
+      <p>Mezclas que <strong>resisten cambios de pH</strong> al agregar pequeñas cantidades de ácido o base. Esencial en biología (sangre) y procesos industriales.</p>
+      <h4>Composición de un buffer</h4>
+      <ul>
+        <li>Un <strong>ácido débil</strong> + su <strong>base conjugada</strong> (ej: <span class="chem">CH₃COOH / CH₃COO⁻</span>)</li>
+        <li>O una <strong>base débil</strong> + su <strong>ácido conjugado</strong> (ej: <span class="chem">NH₃ / NH₄⁺</span>)</li>
+      </ul>
+      <h4>Ecuación de Henderson-Hasselbalch</h4>
+      <div class="formula-box">
+        pH = pKₐ + log([base conjugada] / [ácido])<br>
+        pH = pKₐ + log([A⁻] / [HA])
+      </div>
+      <div class="example-box">
+        <strong>Ej:</strong> Buffer con ácido acético (pKₐ = 4,74) 0,1 M y acetato 0,1 M:<br>
+        pH = 4,74 + log(0,1/0,1) = 4,74 + 0 = <strong>4,74</strong>.<br>
+        Cuando [A⁻] = [HA], el pH es igual al pKₐ.
+      </div>
+      <h4>Buffers naturales famosos</h4>
+      <ul>
+        <li><strong>Sangre humana:</strong> bicarbonato (<span class="chem">H₂CO₃ / HCO₃⁻</span>) mantiene pH ≈ 7,4. Si se desvía mucho hay problemas serios (acidosis, alcalosis).</li>
+        <li><strong>Océanos:</strong> sistema carbonato amortigua cambios de pH, aunque está al límite por el CO₂ antropogénico.</li>
+      </ul>
+      <div class="kitten-note">
+        <svg class="kitten-note-icon" viewBox="0 0 80 80"><use href="#kittenHappy"/></svg>
+        <div class="kitten-note-text"><strong>Conexión total:</strong> equilibrio + ácidos/bases + buffers + lluvia ácida son <em>todo el mismo tema</em> visto desde ángulos distintos. Si dominas equilibrio, dominas el resto.</div>
+      </div>
+    `
+  }
+];
+
+// ======================
+// QUIZ QUESTIONS
+// ======================
+const QUESTIONS = [
+  {
+    q: "Según la teoría de <em>Brønsted-Lowry</em>, un ácido se define como:",
+    opts: [
+      "Una sustancia que libera iones <span class='chem'>OH⁻</span> en solución acuosa.",
+      "Un donador de protones (<span class='chem'>H⁺</span>).",
+      "Un aceptor de pares de electrones.",
+      "Cualquier sustancia con sabor agrio."
+    ],
+    correct: 1,
+    explain: "Brønsted-Lowry define <strong>ácido como donador de H⁺</strong> y base como aceptor de H⁺. La opción A corresponde a Arrhenius (solo válida en agua), y la C describe la teoría de Lewis (más amplia, basada en electrones)."
+  },
+  {
+    q: "En <span class='chem'>NH₃ + H₂O ⇌ NH₄⁺ + OH⁻</span>, el par conjugado ácido/base del <em>agua</em> es:",
+    opts: [
+      "<span class='chem'>H₂O</span> / <span class='chem'>OH⁻</span>",
+      "<span class='chem'>NH₃</span> / <span class='chem'>NH₄⁺</span>",
+      "<span class='chem'>H₂O</span> / <span class='chem'>H₃O⁺</span>",
+      "<span class='chem'>NH₃</span> / <span class='chem'>OH⁻</span>"
+    ],
+    correct: 0,
+    explain: "El agua actúa como <strong>ácido donando un H⁺</strong>, quedando como <span class='chem'>OH⁻</span> (su base conjugada). Los pares conjugados siempre difieren en un solo protón."
+  },
+  {
+    q: "¿Cuál es la <em>base conjugada</em> del <span class='chem'>H₂SO₄</span>?",
+    opts: [
+      "<span class='chem'>SO₄²⁻</span>",
+      "<span class='chem'>HSO₄⁻</span>",
+      "<span class='chem'>H₃SO₄⁺</span>",
+      "<span class='chem'>S²⁻</span>"
+    ],
+    correct: 1,
+    explain: "Al perder <strong>un solo H⁺</strong>, el <span class='chem'>H₂SO₄</span> se convierte en <span class='chem'>HSO₄⁻</span>. Recuerda: el par conjugado difiere en exactamente un protón. <span class='chem'>SO₄²⁻</span> sería la base conjugada del <span class='chem'>HSO₄⁻</span> (dos pasos de desprotonación)."
+  },
+  {
+    q: "¿Cuál de las siguientes es un <em>electrolito fuerte</em>?",
+    opts: [
+      "<span class='chem'>CH₃COOH</span> (ácido acético)",
+      "<span class='chem'>NH₃</span> (amoníaco)",
+      "<span class='chem'>HCl</span> (ácido clorhídrico)",
+      "<span class='chem'>HF</span> (ácido fluorhídrico)"
+    ],
+    correct: 2,
+    explain: "<strong>HCl es un ácido fuerte</strong> que se disocia completamente en agua. Los ácidos fuertes que tienes que memorizar: <span class='chem'>HCl, HBr, HI, HNO₃, H₂SO₄, HClO₄</span>. El resto son electrolitos débiles."
+  },
+  {
+    q: "Un <em>electrolito débil</em> se caracteriza por:",
+    opts: [
+      "Disociarse completamente en agua.",
+      "Disociarse parcialmente, estableciendo un equilibrio.",
+      "No conducir electricidad en absoluto.",
+      "Tener siempre un pH neutro."
+    ],
+    correct: 1,
+    explain: "Los electrolitos débiles alcanzan un <strong>equilibrio</strong> entre la forma molecular y los iones. Por eso usamos <span class='chem'>Kₐ</span> (ácidos) o <span class='chem'>K_b</span> (bases): cuantifican cuánto se disocia."
+  },
+  {
+    q: "Si <span class='chem'>[H⁺] = 1 × 10⁻³ M</span>, ¿cuál es el <em>pH</em>?",
+    opts: ["3", "−3", "11", "7"],
+    correct: 0,
+    explain: "<strong>pH = −log[H⁺]</strong> → pH = −log(10⁻³) = 3. Solución ácida porque pH &lt; 7. Truco: si [H⁺] = 10⁻ⁿ, el pH es n directamente."
+  },
+  {
+    q: "¿Cuál es el pH de una solución <span class='chem'>0,01 M</span> de <span class='chem'>HCl</span>?",
+    opts: ["1", "2", "12", "7"],
+    correct: 1,
+    explain: "HCl es ácido fuerte → se disocia <strong>100%</strong>. Entonces <span class='chem'>[H⁺] = 0,01 M = 10⁻² M</span>. pH = −log(10⁻²) = <strong>2</strong>."
+  },
+  {
+    q: "Si el pOH de una solución es 4, ¿cuál es el <em>pH</em> a 25°C?",
+    opts: ["4", "7", "10", "14"],
+    correct: 2,
+    explain: "Relación fundamental: <strong>pH + pOH = 14</strong> (a 25°C). pH = 14 − 4 = <strong>10</strong>. La solución es básica (pH &gt; 7)."
+  },
+  {
+    q: "La constante <span class='chem'>K_w</span> del agua a 25°C es:",
+    opts: [
+      "<span class='chem'>1 × 10⁻⁷</span>",
+      "<span class='chem'>1 × 10⁻¹⁴</span>",
+      "<span class='chem'>1 × 10⁷</span>",
+      "14"
+    ],
+    correct: 1,
+    explain: "<span class='chem'>K_w = [H⁺][OH⁻] = 1 × 10⁻¹⁴</span> a 25°C. Es la base de toda la escala de pH y relaciona <span class='chem'>[H⁺]</span> con <span class='chem'>[OH⁻]</span>."
+  },
+  {
+    q: "¿Cuál es <span class='chem'>[OH⁻]</span> en una solución con pH = 9?",
+    opts: [
+      "<span class='chem'>10⁻⁹ M</span>",
+      "<span class='chem'>10⁻⁵ M</span>",
+      "<span class='chem'>10⁻¹⁴ M</span>",
+      "<span class='chem'>10⁵ M</span>"
+    ],
+    correct: 1,
+    explain: "Si pH = 9 → pOH = 14 − 9 = 5 → <span class='chem'>[OH⁻] = 10⁻⁵ M</span>. Solución <strong>básica</strong> porque <span class='chem'>[OH⁻] &gt; [H⁺]</span>."
+  },
+  {
+    q: "Calcula el pH de una solución <span class='chem'>0,1 M</span> de <span class='chem'>NaOH</span>:",
+    opts: ["1", "7", "13", "14"],
+    correct: 2,
+    explain: "<span class='chem'>NaOH</span> es base fuerte → se disocia totalmente. <span class='chem'>[OH⁻] = 0,1 M</span> → pOH = 1 → <strong>pH = 14 − 1 = 13</strong> (fuertemente básico)."
+  },
+  {
+    q: "Para un ácido débil HA con <span class='chem'>Kₐ = 1×10⁻⁵</span> y <span class='chem'>C₀ = 0,1 M</span>, ¿cuál es <span class='chem'>[H⁺]</span> aproximadamente?",
+    opts: [
+      "<span class='chem'>1 × 10⁻³ M</span>",
+      "<span class='chem'>1 × 10⁻⁵ M</span>",
+      "<span class='chem'>1 × 10⁻¹ M</span>",
+      "<span class='chem'>1 × 10⁻⁷ M</span>"
+    ],
+    correct: 0,
+    explain: "Aproximación para ácidos débiles diluidos: <span class='chem'>[H⁺] ≈ √(Kₐ · C₀)</span> = √(10⁻⁵ × 0,1) = √(10⁻⁶) = <strong>10⁻³ M</strong>."
+  },
+  {
+    q: "Para <span class='chem'>aA + bB ⇌ cC + dD</span>, la expresión correcta de <em>Kc</em> es:",
+    opts: [
+      "<span class='chem'>[A]ᵃ[B]ᵇ / [C]ᶜ[D]ᵈ</span>",
+      "<span class='chem'>[C]ᶜ[D]ᵈ / [A]ᵃ[B]ᵇ</span>",
+      "<span class='chem'>[A][B] / [C][D]</span>",
+      "<span class='chem'>([A]+[B]) / ([C]+[D])</span>"
+    ],
+    correct: 1,
+    explain: "Kc es siempre <strong>productos / reactantes</strong>, cada concentración elevada a su coeficiente estequiométrico. Los <strong>sólidos y líquidos puros NO aparecen</strong> en la expresión."
+  },
+  {
+    q: "Si <span class='chem'>K_c &gt;&gt; 1</span> en el equilibrio:",
+    opts: [
+      "Predominan los reactantes.",
+      "Predominan los productos.",
+      "Las concentraciones son iguales.",
+      "La reacción no ocurre."
+    ],
+    correct: 1,
+    explain: "<span class='chem'>K_c &gt; 1</span> indica que <strong>[productos] &gt; [reactantes]</strong>. Mientras mayor sea K_c, más desplazado hacia productos. <em>OJO:</em> esto no dice nada de la velocidad (eso es cinética)."
+  },
+  {
+    q: "Para <span class='chem'>N₂(g) + 3H₂(g) ⇌ 2NH₃(g)</span>, si aumenta la <em>presión</em>:",
+    opts: [
+      "Equilibrio hacia reactantes.",
+      "Equilibrio hacia productos.",
+      "No hay desplazamiento.",
+      "Equilibrio hacia el lado con más moles de gas."
+    ],
+    correct: 1,
+    explain: "Le Chatelier: al aumentar P, el sistema se desplaza hacia el lado con <strong>menos moles gaseosos</strong>. Reactantes: 1+3 = 4 moles. Productos: 2 moles. Se desplaza hacia productos. Esta es la base del proceso Haber-Bosch."
+  },
+  {
+    q: "En una reacción <em>exotérmica</em> en equilibrio, al AUMENTAR la temperatura:",
+    opts: [
+      "<span class='chem'>K_c</span> aumenta.",
+      "<span class='chem'>K_c</span> disminuye.",
+      "<span class='chem'>K_c</span> no cambia.",
+      "<span class='chem'>K_c</span> se hace cero."
+    ],
+    correct: 1,
+    explain: "En exotérmicas, el calor es un \"producto\". Al aumentar T, Le Chatelier desplaza hacia <strong>reactantes</strong>, reduciendo K_c. <strong>La temperatura es la ÚNICA variable que modifica el valor de K_c.</strong>"
+  },
+  {
+    q: "¿Cuál NO modifica el valor de la constante <em>Kc</em>?",
+    opts: [
+      "La temperatura.",
+      "La naturaleza de la reacción.",
+      "La concentración inicial de reactantes.",
+      "La entalpía de reacción."
+    ],
+    correct: 2,
+    explain: "Cambiar concentraciones <strong>desplaza el equilibrio</strong> pero NO cambia K_c. Solo la temperatura altera el valor numérico de la constante."
+  },
+  {
+    q: "La relación entre <span class='chem'>K_p</span> y <span class='chem'>K_c</span> es:",
+    opts: [
+      "<span class='chem'>K_p = K_c</span>",
+      "<span class='chem'>K_p = K_c (RT)^Δn</span>",
+      "<span class='chem'>K_p = K_c · R · T</span>",
+      "<span class='chem'>K_p = K_c / RT</span>"
+    ],
+    correct: 1,
+    explain: "Donde <strong>Δn = moles gaseosos de productos − moles gaseosos de reactantes</strong>. Si Δn = 0, entonces <span class='chem'>K_p = K_c</span>."
+  },
+  {
+    q: "El <em>cociente de reacción Q</em> se compara con K para:",
+    opts: [
+      "Calcular el pH.",
+      "Predecir hacia dónde se desplazará la reacción.",
+      "Medir la temperatura.",
+      "Calcular la entalpía."
+    ],
+    correct: 1,
+    explain: "Q tiene la misma forma que K pero con concentraciones <strong>en cualquier momento</strong>. • Si <strong>Q &lt; K</strong>: reacción avanza hacia productos. • Si <strong>Q &gt; K</strong>: retrocede hacia reactantes. • Si <strong>Q = K</strong>: está en equilibrio."
+  },
+  {
+    q: "Para <span class='chem'>N₂O₄(g) ⇌ 2NO₂(g)</span> con <span class='chem'>K_c = 4</span> y <span class='chem'>[N₂O₄] = 0,5 M</span> en equilibrio, ¿cuál es <span class='chem'>[NO₂]</span>?",
+    opts: [
+      "<span class='chem'>1 M</span>",
+      "<span class='chem'>√2 ≈ 1,41 M</span>",
+      "<span class='chem'>2 M</span>",
+      "<span class='chem'>0,5 M</span>"
+    ],
+    correct: 1,
+    explain: "<span class='chem'>K_c = [NO₂]² / [N₂O₄]</span> → 4 = [NO₂]² / 0,5 → [NO₂]² = 2 → <strong>[NO₂] = √2 ≈ 1,41 M</strong>. No olvides el cuadrado por el coeficiente 2 del NO₂."
+  },
+  {
+    q: "La <em>lluvia normal</em> (no contaminada) tiene un pH aproximado de:",
+    opts: ["7,0 (neutra)", "5,6", "4,0", "8,0"],
+    correct: 1,
+    explain: "La lluvia natural tiene pH ~<strong>5,6</strong> debido al <span class='chem'>CO₂</span> atmosférico, que forma ácido carbónico: <span class='chem'>CO₂ + H₂O ⇌ H₂CO₃</span>. Se considera <strong>lluvia ácida</strong> cuando el pH es menor a 5,6."
+  },
+  {
+    q: "¿Cuál es el principal gas causante de lluvia ácida proveniente de combustibles fósiles con azufre?",
+    opts: [
+      "<span class='chem'>SO₂</span>",
+      "<span class='chem'>CO₂</span>",
+      "<span class='chem'>O₃</span>",
+      "<span class='chem'>CH₄</span>"
+    ],
+    correct: 0,
+    explain: "El <strong><span class='chem'>SO₂</span></strong> es emitido al quemar carbón y petróleo con azufre. En la atmósfera se oxida a <span class='chem'>SO₃</span> y luego forma <span class='chem'>H₂SO₄</span>. Es el causante #1 de la lluvia ácida más agresiva."
+  },
+  {
+    q: "La reacción de <span class='chem'>SO₃</span> con agua atmosférica produce:",
+    opts: [
+      "Ácido sulfuroso (<span class='chem'>H₂SO₃</span>)",
+      "Ácido sulfúrico (<span class='chem'>H₂SO₄</span>)",
+      "Sulfuro de hidrógeno (<span class='chem'>H₂S</span>)",
+      "Azufre elemental y oxígeno"
+    ],
+    correct: 1,
+    explain: "<span class='chem'>SO₃ + H₂O → H₂SO₄</span> (ácido sulfúrico, <strong>ácido fuerte</strong> y muy corrosivo). Es la principal vía química de la lluvia ácida más dañina."
+  },
+  {
+    q: "Los <span class='chem'>NOₓ</span> en la atmósfera forman principalmente:",
+    opts: [
+      "Ácido carbónico (<span class='chem'>H₂CO₃</span>)",
+      "Ácido nítrico (<span class='chem'>HNO₃</span>)",
+      "Ácido sulfúrico (<span class='chem'>H₂SO₄</span>)",
+      "Amoníaco (<span class='chem'>NH₃</span>)"
+    ],
+    correct: 1,
+    explain: "Los <span class='chem'>NOₓ</span> se generan en motores a alta T. Reacción: <span class='chem'>3NO₂ + H₂O → 2HNO₃ + NO</span>. El <strong>HNO₃</strong> es el segundo gran contribuyente de la lluvia ácida."
+  },
+  {
+    q: "¿Cuál NO es un efecto de la lluvia ácida?",
+    opts: [
+      "Acidificación de lagos y ríos.",
+      "Daño a bosques.",
+      "Corrosión de edificios de mármol/caliza.",
+      "Aumento del grosor de la capa de ozono."
+    ],
+    correct: 3,
+    explain: "La lluvia ácida <strong>no afecta al ozono estratosférico</strong> (esa es otra problemática, ligada a los CFCs). Sí causa los demás: acidificación, daño a vegetación y corrosión de <span class='chem'>CaCO₃</span>."
+  },
+  {
+    q: "Una medida efectiva contra la lluvia ácida es:",
+    opts: [
+      "Aumentar el uso de carbón con alto contenido de azufre.",
+      "Instalar lavadores (scrubbers) con <span class='chem'>CaCO₃</span> en chimeneas.",
+      "Reducir la cobertura vegetal urbana.",
+      "Aumentar las emisiones de <span class='chem'>CO₂</span>."
+    ],
+    correct: 1,
+    explain: "Los <strong>scrubbers</strong> capturan SO₂ con <span class='chem'>CaCO₃</span>: <span class='chem'>SO₂ + CaCO₃ → CaSO₃ + CO₂</span>. Otras medidas: combustibles bajos en S, energías renovables, catalizadores en autos, normas ambientales."
+  },
+  {
+    q: "Al disolver <span class='chem'>NaCl</span> en agua, la solución resultante es:",
+    opts: ["Ácida (pH &lt; 7)", "Básica (pH &gt; 7)", "Neutra (pH = 7)", "Buffer"],
+    correct: 2,
+    explain: "<span class='chem'>NaCl</span> proviene de ácido fuerte (<span class='chem'>HCl</span>) y base fuerte (<span class='chem'>NaOH</span>). <strong>Ninguno de sus iones hidroliza</strong>, así que el pH queda neutro (≈7)."
+  },
+  {
+    q: "Una solución <em>buffer</em> sirve para:",
+    opts: [
+      "Aumentar el pH bruscamente al agregar agua.",
+      "Resistir cambios significativos de pH al agregar ácido o base.",
+      "Eliminar todos los electrolitos.",
+      "Convertir ácidos fuertes en débiles."
+    ],
+    correct: 1,
+    explain: "Un buffer es una mezcla de <strong>ácido débil + su base conjugada</strong> (o base débil + ácido conjugado). Neutraliza pequeñas adiciones de ácido o base. Fundamental en sistemas biológicos (sangre: bicarbonato)."
+  },
+  {
+    q: "Si un ácido débil HA tiene <span class='chem'>Kₐ = 1,8 × 10⁻⁵</span>, su <span class='chem'>pKₐ</span> es:",
+    opts: ["5", "4,74", "−4,74", "1,8"],
+    correct: 1,
+    explain: "<span class='chem'>pKₐ = −log(Kₐ) = −log(1,8 × 10⁻⁵) ≈ 4,74</span>. <strong>Menor pKₐ = ácido más fuerte.</strong> Este valor corresponde al ácido acético."
+  },
+  {
+    q: "En ingeniería industrial, dominar el equilibrio químico permite:",
+    opts: [
+      "Eliminar la necesidad de catalizadores.",
+      "Maximizar el rendimiento de productos controlando T, P y concentraciones.",
+      "Reducir el costo de producción a cero.",
+      "Romper las leyes de la termodinámica."
+    ],
+    correct: 1,
+    explain: "Aplicando Le Chatelier (P, T, concentración) se optimiza el rendimiento. Ejemplos: <strong>Haber-Bosch</strong> (NH₃), <strong>proceso de contacto</strong> (H₂SO₄). Esto es ingeniería química aplicada."
+  }
+];
+
+// ======================
+// STATE & RENDER
+// ======================
+let state = {
+  screen: 'welcome',
+  currentIndex: 0,
+  answers: []
+};
+
+const main = document.getElementById('main');
+const resetBtn = document.getElementById('resetBtn');
+const homeBtn = document.getElementById('homeBtn');
+const progressWrap = document.getElementById('progressWrap');
+const progressBar = document.getElementById('progressBar');
+const qCurrent = document.getElementById('qCurrent');
+const qTotal = document.getElementById('qTotal');
+const modal = document.getElementById('modal');
+const modalCancel = document.getElementById('modalCancel');
+const modalConfirm = document.getElementById('modalConfirm');
+
+qTotal.textContent = QUESTIONS.length;
+
+function render() {
+  if (state.screen === 'welcome') {
+    resetBtn.classList.add('hidden');
+    homeBtn.classList.add('hidden');
+    progressWrap.classList.add('hidden');
+    renderWelcome();
+  } else if (state.screen === 'theory') {
+    resetBtn.classList.add('hidden');
+    homeBtn.classList.remove('hidden');
+    progressWrap.classList.add('hidden');
+    renderTheory();
+  } else if (state.screen === 'quiz') {
+    resetBtn.classList.remove('hidden');
+    homeBtn.classList.add('hidden');
+    progressWrap.classList.remove('hidden');
+    updateProgress();
+    renderQuestion();
+  } else if (state.screen === 'end') {
+    resetBtn.classList.remove('hidden');
+    homeBtn.classList.remove('hidden');
+    progressWrap.classList.add('hidden');
+    renderEnd();
+  }
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function renderWelcome() {
+  main.innerHTML = `
+    <section class="screen welcome">
+      <div class="welcome-hero">
+        <svg class="welcome-kitten" viewBox="0 0 140 140"><use href="#kittenSit"/></svg>
+        <div class="eyebrow">Semana 11 · Sumativa 6</div>
+        <h1>Equilibrio químico<br>y <em>lluvia ácida</em></h1>
+        <p class="lede">Guía de estudio con teoría + 30 preguntas para la prueba <span class="heart">♡</span>. Si te equivocas, te explica por qué; si aciertas, refuerza el concepto. Ánimo, tú puedes.</p>
+      </div>
+
+      <div class="start-cards">
+        <button class="start-card" id="theoryStart" type="button">
+          <div class="start-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <div class="start-card-title">Estudiar teoría</div>
+          <div class="start-card-desc">7 temas con definiciones, fórmulas y ejemplos.</div>
+          <div class="start-card-arrow">Repasar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </button>
+        <button class="start-card primary" id="quizStart" type="button">
+          <div class="start-card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="start-card-title">Comenzar quiz</div>
+          <div class="start-card-desc">30 preguntas mixtas. Feedback al instante.</div>
+          <div class="start-card-arrow">Empezar <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </button>
+      </div>
+
+      <div class="meta-row">
+        <div class="meta-item">
+          <span class="meta-label">Preguntas</span>
+          <span class="meta-value"><em>30</em></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Temas</span>
+          <span class="meta-value"><em>7</em></span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Nivel</span>
+          <span class="meta-value">Mixto</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Formato</span>
+          <span class="meta-value">Alternativas</span>
+        </div>
+      </div>
+    </section>
+  `;
+  document.getElementById('theoryStart').addEventListener('click', () => {
+    state.screen = 'theory';
+    render();
+  });
+  document.getElementById('quizStart').addEventListener('click', startQuiz);
+}
+
+function renderTheory() {
+  const chips = THEORY.map(t => `<a href="#${t.id}" class="topic-chip">${t.num}. ${t.title}</a>`).join('');
+  const cards = THEORY.map((t, idx) => `
+    <article class="topic-card" id="${t.id}">
+      <div class="topic-num-tag">Tema ${t.num}</div>
+      <h3>${t.title}</h3>
+      ${t.content}
+    </article>
+  `).join('');
+
+  main.innerHTML = `
+    <section class="screen theory">
+      <header class="theory-header">
+        <div class="eyebrow">Teoría · 7 temas</div>
+        <h1>Lo que <em>tienes</em> que saber</h1>
+        <p>Repaso completo de los conceptos clave. Tómate tu tiempo, lee con calma, anota lo que no entiendas, y cuando estés lista, pasa al quiz.</p>
+      </header>
+
+      <nav class="topic-nav">${chips}</nav>
+
+      ${cards}
+
+      <div class="theory-cta">
+        <svg class="theory-cta-kitten" viewBox="0 0 90 80"><use href="#kittenStudy"/></svg>
+        <h3>¿Lista para probar?</h3>
+        <p>30 preguntas que cubren todo lo de arriba. No pasa nada si te equivocas, así se aprende.</p>
+        <button class="btn-primary" id="theoryToQuiz" type="button">
+          Comenzar quiz
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </section>
+  `;
+
+  document.getElementById('theoryToQuiz').addEventListener('click', startQuiz);
+  // Smooth scroll for topic chips
+  main.querySelectorAll('.topic-chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = chip.getAttribute('href').slice(1);
+      document.getElementById(id)?.scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+  });
+}
+
+function renderQuestion() {
+  const i = state.currentIndex;
+  const q = QUESTIONS[i];
+  const userAns = state.answers[i];
+  const answered = userAns !== undefined && userAns !== null;
+
+  let optsHTML = q.opts.map((opt, idx) => {
+    const letter = ['A','B','C','D'][idx];
+    let cls = 'option';
+    if (answered) {
+      if (idx === q.correct) cls += ' correct';
+      else if (idx === userAns) cls += ' wrong';
+      else cls += ' dimmed';
+    }
+    return `<button class="${cls}" data-idx="${idx}" ${answered ? 'disabled' : ''} type="button">
+      <span class="opt-letter">${letter}</span>
+      <span class="opt-text">${opt}</span>
+    </button>`;
+  }).join('');
+
+  let feedbackHTML = '';
+  let nextHTML = '';
+  if (answered) {
+    const isCorrect = userAns === q.correct;
+    feedbackHTML = `
+      <div class="feedback ${isCorrect ? 'correct' : 'wrong'}">
+        <svg class="fb-kitten" viewBox="0 0 80 80">
+          <use href="${isCorrect ? '#kittenHappy' : '#kittenSad'}"/>
+        </svg>
+        <div class="fb-content">
+          <div class="fb-head">
+            ${isCorrect ? '¡Correctísimo!' : 'Casi… pero no'}
+          </div>
+          <div class="fb-body">${q.explain}</div>
+        </div>
+      </div>
+    `;
+    const isLast = i === QUESTIONS.length - 1;
+    nextHTML = `
+      <div class="next-wrap">
+        <button class="btn-primary" id="nextBtn" type="button">
+          ${isLast ? 'Ver resultados' : 'Siguiente'}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    `;
+  }
+
+  main.innerHTML = `
+    <section class="screen question-wrap">
+      <div class="q-num">
+        <svg class="kitten-mini" viewBox="0 0 40 40"><use href="#kittenMini"/></svg>
+        Pregunta <strong>${i+1}</strong> · de ${QUESTIONS.length}
+      </div>
+      <h2 class="question-text">${q.q}</h2>
+      <div class="options">${optsHTML}</div>
+      ${feedbackHTML}
+      ${nextHTML}
+    </section>
+  `;
+
+  if (!answered) {
+    main.querySelectorAll('.option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = parseInt(btn.dataset.idx);
+        state.answers[i] = idx;
+        renderQuestion();
+      });
+    });
+  } else {
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      if (i === QUESTIONS.length - 1) {
+        state.screen = 'end';
+      } else {
+        state.currentIndex++;
+      }
+      render();
+    });
+  }
+}
+
+function renderEnd() {
+  const total = QUESTIONS.length;
+  const correct = state.answers.reduce((acc, a, i) => acc + (a === QUESTIONS[i].correct ? 1 : 0), 0);
+  const pct = Math.round((correct/total) * 100);
+
+  const useGoodKitten = pct >= 70;
+  const kittenSym = useGoodKitten ? '#kittenWin' : '#kittenComfort';
+
+  let msg = '';
+  if (pct === 100) msg = '¡PERFECTO! Llegas al control con todo dominado. Date un gusto. 💖';
+  else if (pct >= 85) msg = 'Excelente nivel. Conceptos sólidos. Repasa lo poquito que falló y vas más que lista.';
+  else if (pct >= 70) msg = 'Vas bien. Identifica los temas donde te equivocaste, vuelve a la teoría y dale otra vuelta al quiz.';
+  else if (pct >= 50) msg = 'A medio camino. Hay temas claros, otros para repasar. Lee las explicaciones y vuelve a la teoría — vas a llegar.';
+  else msg = 'Sin pánico. Justo para esto es estudiar: para equivocarse aquí y no en el control. Repasa la teoría con calma y reintenta. 🐾';
+
+  const r = 80;
+  const c = 2 * Math.PI * r;
+  const dash = c * (pct/100);
+
+  let reviewHTML = state.answers.map((ans, i) => {
+    const isOk = ans === QUESTIONS[i].correct;
+    return `<div class="review-item">
+      <div class="review-mark ${isOk ? 'ok' : 'no'}">${isOk ? '✓' : '✗'}</div>
+      <div>
+        <div class="review-q">Pregunta ${i+1}</div>
+        <div class="review-text">${stripHTML(QUESTIONS[i].q).substring(0, 110)}${stripHTML(QUESTIONS[i].q).length > 110 ? '…' : ''}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  main.innerHTML = `
+    <section class="screen end">
+      <svg class="end-kitten" viewBox="0 0 140 140"><use href="${kittenSym}"/></svg>
+      <div class="score-ring">
+        <svg viewBox="0 0 180 180">
+          <defs>
+            <linearGradient id="pinkGradEnd" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#ff5a9f"/>
+              <stop offset="100%" stop-color="#ffb5d4"/>
+            </linearGradient>
+          </defs>
+          <circle class="score-ring-bg" cx="90" cy="90" r="${r}"/>
+          <circle class="score-ring-fg" cx="90" cy="90" r="${r}"
+            stroke="url(#pinkGradEnd)"
+            stroke-dasharray="${c}"
+            stroke-dashoffset="${c}"
+            id="ringFg"/>
+        </svg>
+        <div class="score-num">
+          <div class="score-num-inner">
+            <div class="score-big"><em>${correct}</em>/${total}</div>
+            <div class="score-pct">${pct}% CORRECTO</div>
+          </div>
+        </div>
+      </div>
+      <h2>${pct >= 70 ? '<em>¡Bien hecho!</em>' : 'Resultado'}</h2>
+      <p class="end-msg">${msg}</p>
+      <div class="end-actions">
+        <button class="btn-primary" id="restartBtn" type="button">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          Reintentar quiz
+        </button>
+        <button class="btn-secondary" id="reviewBtn" type="button">Ver desglose</button>
+      </div>
+      <div class="review hidden" id="reviewSection">
+        <h3>Desglose de respuestas</h3>
+        ${reviewHTML}
+      </div>
+    </section>
+  `;
+
+  requestAnimationFrame(() => {
+    const ring = document.getElementById('ringFg');
+    ring.style.strokeDashoffset = (c - dash) + '';
+  });
+
+  document.getElementById('restartBtn').addEventListener('click', () => {
+    state = { screen: 'welcome', currentIndex: 0, answers: [] };
+    render();
+  });
+  document.getElementById('reviewBtn').addEventListener('click', () => {
+    const section = document.getElementById('reviewSection');
+    section.classList.toggle('hidden');
+    if (!section.classList.contains('hidden')) {
+      section.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+  });
+}
+
+function stripHTML(s) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = s;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function updateProgress() {
+  const total = QUESTIONS.length;
+  const current = state.currentIndex + 1;
+  const answered = state.answers.filter(a => a !== undefined && a !== null).length;
+  const pct = (answered / total) * 100;
+  progressBar.style.width = pct + '%';
+  qCurrent.textContent = current;
+}
+
+function startQuiz() {
+  state = { screen: 'quiz', currentIndex: 0, answers: [] };
+  render();
+}
+
+function goHome() {
+  state = { screen: 'welcome', currentIndex: 0, answers: [] };
+  render();
+}
+
+resetBtn.addEventListener('click', () => modal.classList.add('active'));
+homeBtn.addEventListener('click', goHome);
+modalCancel.addEventListener('click', () => modal.classList.remove('active'));
+modalConfirm.addEventListener('click', () => {
+  modal.classList.remove('active');
+  goHome();
+});
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) modal.classList.remove('active');
+});
+
+document.addEventListener('keydown', (e) => {
+  if (state.screen === 'quiz') {
+    const userAns = state.answers[state.currentIndex];
+    const answered = userAns !== undefined && userAns !== null;
+    if (!answered) {
+      const key = e.key.toUpperCase();
+      const letterIdx = ['A','B','C','D'].indexOf(key);
+      if (letterIdx >= 0 && letterIdx < QUESTIONS[state.currentIndex].opts.length) {
+        state.answers[state.currentIndex] = letterIdx;
+        renderQuestion();
+      }
+    } else {
+      if (e.key === 'Enter' || e.key === 'ArrowRight') {
+        if (state.currentIndex === QUESTIONS.length - 1) state.screen = 'end';
+        else state.currentIndex++;
+        render();
+      }
+    }
+  }
+});
+
+render();
+</script>
 </body>
 </html>
